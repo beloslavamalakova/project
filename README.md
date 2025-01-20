@@ -43,7 +43,7 @@ This project focuses on developing and evaluating fair and balanced matching alg
 #### 1. Generate Synthetic Data
 Run the script to create datasets of students and universities:
 ```bash
-python synthetic_data_generator.py
+python dataset_creation.py
 ```
 This will generate:
 - `synthetic_students.csv`
@@ -52,14 +52,14 @@ This will generate:
 #### 2. Run Matching Algorithms
 Execute the script to produce matchings:
 ```bash
-python matching_algorithms.py
+python simple_algorithms.py
 ```
 Results will be saved in the `matchings_results/` folder.
 
 #### 3. Evaluate Matchings
 Run the evaluation script to assess the fairness of a specific matching:
 ```bash
-python evaluate_matchings.py
+python evalate_matchings.py
 ```
 Specify the input file for the matching (e.g., `serial_dictatorship.txt`) and view the fairness metrics.
 
