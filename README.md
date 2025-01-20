@@ -1,4 +1,4 @@
-# README: Fair and Balanced Matching in Bipartite Graphs
+# Fair and Balanced Matching in Bipartite Graphs
 
 ## Overview
 This project focuses on developing and evaluating fair and balanced matching algorithms for bipartite graphs. Inspired by the Gale-Shapley algorithm, the research aims to ensure fairness and mutual satisfaction between nodes in the graph while evaluating the effectiveness of these matchings through various fairness metrics.
