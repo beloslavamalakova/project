@@ -10,7 +10,7 @@ from typing import Dict
 from data.data_structures import College, Student
 
 
-def is_envy_justified(student_id: int, other_id: int, assigned_college_id: int,
+def is_envy_justified(student_id: int, other_id: int, assigned_college_id: int, other_college_id: int,
                       students: Dict[int, Student], colleges: Dict[int, College]) -> bool:
     """
     Checks wheteher a student has justified envy towards another student.
@@ -19,20 +19,22 @@ def is_envy_justified(student_id: int, other_id: int, assigned_college_id: int,
     Acceptable-ness always holds since we assume students prefer some college to none,
     so we don't check it.
 
+    Other student is assumed to be assigned to other-college.
+
     Parameters:
         student_id: The student who is envying
         other_id: The student who is envied
         assigned_college_id: The college assigned to student_id
+        other_college_id: college assigned to other_id
         students: A dictionary mapping student ids to student dicts
         colleges: A dictionary mapping college ids to college dicts
     """
 
     student_pref = students[student_id]['preferences']
-    other_pref = students[other_id]['preferences']
     college_pref = colleges[assigned_college_id]['preferences']
 
-    student_prefers_over_other = student_pref.index(assigned_college_id) > other_pref.index(assigned_college_id) 
-    college_prefers_other_over_student = college_pref.index(other_id) < college_pref.index(student_id)
+    student_prefers_over_other = student_pref.index(assigned_college_id) > student_pref.index(other_college_id) 
+    college_prefers_other_over_student = college_pref.index(other_id) > college_pref.index(student_id)
 
     return student_prefers_over_other and college_prefers_other_over_student
 
@@ -55,7 +57,7 @@ def is_efk(students: Dict[int, Student], colleges: Dict[int, College], matching:
             if student_id == other_id:
                 continue
 
-            if is_envy_justified(student_id, other_id, matching[student_id], students, colleges):
+            if is_envy_justified(student_id, other_id, matching[student_id], matching[other_id], students, colleges):
                 envy_peers += 1
 
             if envy_peers > k:
@@ -83,7 +85,7 @@ def calculate_efk(students: Dict[int, Student], colleges: Dict[int, College], ma
             if student_id == other_id:
                 continue
 
-            if is_envy_justified(student_id, other_id, matching[student_id], students, colleges):
+            if is_envy_justified(student_id, other_id, matching[student_id], matching[other_id], students, colleges):
                 envy_peers += 1
 
         if envy_peers > k_lower_bound:
