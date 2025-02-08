@@ -1,5 +1,7 @@
 """
 This contains methods to synthetically generate preferences between students and colleges.
+
+We use the Mallows model to generate a preference list for each student and college.
 """
 
 from typing import Dict, List, Tuple
