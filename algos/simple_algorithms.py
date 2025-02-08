@@ -37,7 +37,7 @@ def match_serial_dictatorship(students: Dict[int, Student], colleges: Dict[int, 
 
     return matching
 
-def match_acda(students: Dict[int, Student], colleges: Dict[int, College]) -> Dict[int, int]:
+def match_acda(students: Dict[int, Student], colleges: Dict[int, College], quotas: List) -> Dict[int, int]: 
     """
     Matches students to colleges using the ACDA algorithm.
     As in section 3 in "Fairness and Efficiency Trade-off in Two-Sided Matching".
@@ -49,5 +49,28 @@ def match_acda(students: Dict[int, Student], colleges: Dict[int, College]) -> Di
     Returns:
         A dictionary mapping student ids to college ids
     """
+    #artificial caps( max quotas)- vector q
+    #run standard deferred acceptance mechanism
+        #students pic their priority
+        #college i admit to a waiting list q_i students depending on college preferences
+        #repeat step 1 with next priority until every student is in cllege or rejected by all
+    #from Gale and Shapley Stable Marriage paper
+    waiting_lists = {}
+    rejected_list = students
+    round = 0
 
-    raise NotImplementedError
+    while round < len(colleges) or not rejected_list:
+
+        for student in rejected_list: #step 1
+            waiting_lists[student[round]] = student
+            rejected_list = []
+        
+        for college in waiting_lists: #step 2
+            if len(waiting_lists[college]) > quotas[college]:
+
+                ranked_students =  sorted(waiting_lists[college], key = lambda x: colleges[college].index(x))[:quotas[college]]
+                waiting_lists[college] = ranked_students[:colleges[college]]
+                rejected_list.extend(ranked_students[quotas[college]+1:])
+                
+                round +=1
+    return waiting_lists
