@@ -75,14 +75,3 @@ def sample_mallows(n: int, phi: float, master_ranking: List[int] | None = None) 
         ranking = [master_ranking[i] for i in ranking]
     
     return ranking
-
-
-if __name__ == "__main__":
-    students, colleges = generate_preferences(5, 3, 1, 3)
-    print("STUDENTS:")
-    for student in students.values():
-        print(student)
-
-    print("\nCOLLEGES:")
-    for college in colleges.values():
-        print(college)
