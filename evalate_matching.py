@@ -107,6 +107,6 @@ if __name__ == "__main__":
     """
     Change the name of the file_name to whatever matching you want to evaluate.
     """
-    file_name = "acda.txt"
+    file_name = "stable_matching.txt"
     results = evaluate_matchings(file_name)
     print("Evaluation Results:", results)

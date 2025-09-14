@@ -19,7 +19,6 @@ waiting_list = []
 proposals = {}
 count = 0
 
-# Main loop to create stable pairs
 while len(waiting_list) < len(man_list):
     # Men make proposals to their highest-ranked available women
     for man in man_list:
